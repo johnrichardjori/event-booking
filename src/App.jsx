@@ -5,10 +5,11 @@ import {
   Link,
   HashRouter,
 } from "react-router-dom";
-import SearchForm from "./SearchForm";
-import EventList from "./EventList";
+// import SearchForm from "./SearchForm";
+// import EventList from "./EventList";
 import Booking from "./Booking";
 import MyBookings from "./MyBooking";
+import SearchPage from "./SearchPage";
 import "./App.css";
 
 export default function App() {
@@ -19,8 +20,7 @@ export default function App() {
         <Link to="/my-bookings">My Bookings</Link>
       </nav>
       <Routes>
-        <Route path="/" element={<SearchForm />} />
-        <Route path="/results" element={<EventList />} />
+        <Route path="/" element={<SearchPage />} />
         <Route path="/booking/:eventName/:city/:state" element={<Booking />} />
         <Route path="/my-bookings" element={<MyBookings />} />
       </Routes>
