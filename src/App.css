@@ -1,0 +1,21 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 1rem;
+}
+nav a {
+  margin-right: 1rem;
+}
+form,
+ul {
+  margin: 1rem 0;
+}
+#state,
+#city {
+  margin-bottom: 0.5rem;
+}
+button {
+  margin-top: 0.5rem;
+}
+label {
+  margin-right: 1rem;
+}
