@@ -1,20 +1,12 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  HashRouter,
-} from "react-router-dom";
-// import SearchForm from "./SearchForm";
-// import EventList from "./EventList";
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import SearchPage from "./SearchPage";
 import Booking from "./Booking";
 import MyBookings from "./MyBooking";
-import SearchPage from "./SearchPage";
-import "./App.css";
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <nav>
         <Link to="/">Find Events</Link> |{" "}
         <Link to="/my-bookings">My Bookings</Link>
@@ -24,6 +16,6 @@ export default function App() {
         <Route path="/booking/:eventName/:city/:state" element={<Booking />} />
         <Route path="/my-bookings" element={<MyBookings />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }

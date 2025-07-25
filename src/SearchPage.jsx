@@ -7,17 +7,18 @@ export default function SearchPage() {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [events, setEvents] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
   useEffect(() => {
     fetch("https://eventdata.onrender.com/states")
-      .then((r) => r.json())
+      .then((res) => res.json())
       .then(setStates);
   }, []);
 
   useEffect(() => {
     if (state) {
       fetch(`https://eventdata.onrender.com/cities/${state}`)
-        .then((r) => r.json())
+        .then((res) => res.json())
         .then(setCities);
     } else {
       setCities([]);
@@ -25,19 +26,25 @@ export default function SearchPage() {
     }
   }, [state]);
 
-  useEffect(() => {
+  const performSearch = () => {
     if (state && city) {
       fetch(`https://eventdata.onrender.com/events?state=${state}&city=${city}`)
-        .then((r) => r.json())
-        .then(setEvents);
-    } else {
-      setEvents([]);
+        .then((res) => res.json())
+        .then((data) => {
+          setEvents(data);
+          setHasSearched(true);
+        });
     }
-  }, [state, city]);
+  };
 
   return (
     <div>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          performSearch();
+        }}
+      >
         <div id="state">
           <select value={state} onChange={(e) => setState(e.target.value)}>
             <option value="">Select state</option>
@@ -48,9 +55,12 @@ export default function SearchPage() {
             ))}
           </select>
         </div>
-
         <div id="city">
-          <select value={city} onChange={(e) => setCity(e.target.value)}>
+          <select
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            disabled={!state}
+          >
             <option value="">Select city</option>
             {cities.map((c) => (
               <option key={c} value={c}>
@@ -59,9 +69,12 @@ export default function SearchPage() {
             ))}
           </select>
         </div>
+        <button type="submit" id="searchBtn">
+          Search
+        </button>
       </form>
 
-      {state && city && (
+      {hasSearched && (
         <div>
           <h1>
             {events.length} events available in {city}
