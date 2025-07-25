@@ -45,32 +45,32 @@ export default function SearchPage() {
           performSearch();
         }}
       >
-        <div id="state" className="custom-select-container">
-          <select value={state} onChange={(e) => setState(e.target.value)}>
-            <option value="">Select state</option>
+        <div id="state">
+          <ul>
             {states.map((s) => (
-              <option key={s} value={s}>
+              <li
+                key={s}
+                onClick={() => {
+                  setState(s);
+                  setCity("");
+                }}
+              >
                 {s}
-              </option>
+              </li>
             ))}
-          </select>
+          </ul>
         </div>
-
-        <div id="city" className="custom-select-container">
-          <select
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            disabled={!state}
-          >
-            <option value="">Select city</option>
-            {cities.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
+        <div id="city">
+          {state && (
+            <ul>
+              {cities.map((c) => (
+                <li key={c} onClick={() => setCity(c)}>
+                  {c}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-
         <button type="submit" id="searchBtn">
           Search
         </button>
