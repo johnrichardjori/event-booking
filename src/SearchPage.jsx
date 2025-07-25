@@ -9,21 +9,18 @@ export default function SearchPage() {
   const [events, setEvents] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
 
-  // Fetch states on mount
   useEffect(() => {
     fetch("https://eventdata.onrender.com/states")
       .then((r) => r.json())
       .then(setStates);
   }, []);
 
-  // Fetch cities whenever a state is chosen
   useEffect(() => {
     if (state) {
       fetch(`https://eventdata.onrender.com/cities/${state}`)
         .then((r) => r.json())
         .then(setCities);
     } else {
-      // reset cities and selection when state is cleared
       setCities([]);
       setCity("");
     }
@@ -47,7 +44,6 @@ export default function SearchPage() {
           performSearch();
         }}
       >
-        {/* State dropdown container always present */}
         <div id="state">
           <ul>
             {states.map((s) => (
@@ -61,11 +57,9 @@ export default function SearchPage() {
                 {s}
               </li>
             ))}
-            {/* if no states loaded yet, we still render an empty list */}
           </ul>
         </div>
 
-        {/* City dropdown container always present */}
         <div id="city">
           <select></select>
           <ul>
@@ -74,11 +68,9 @@ export default function SearchPage() {
                 {c}
               </li>
             ))}
-            {/* initially cities = [], so this is an empty <ul> */}
           </ul>
         </div>
 
-        {/* Search button, hidden/disabled until both selected if you like */}
         <button type="submit" id="searchBtn" disabled={!state || !city}>
           Search
         </button>
