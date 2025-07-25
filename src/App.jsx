@@ -13,7 +13,7 @@ import "./App.css";
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <nav>
         <Link to="/">Find Events</Link> |{" "}
         <Link to="/my-bookings">My Bookings</Link>
@@ -24,6 +24,6 @@ export default function App() {
         <Route path="/booking/:eventName/:city/:state" element={<Booking />} />
         <Route path="/my-bookings" element={<MyBookings />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }

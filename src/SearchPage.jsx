@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function SearchPage() {
   const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState([" "]);
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [events, setEvents] = useState([]);
@@ -11,14 +11,14 @@ export default function SearchPage() {
 
   useEffect(() => {
     fetch("https://eventdata.onrender.com/states")
-      .then((res) => res.json())
+      .then((r) => r.json())
       .then(setStates);
   }, []);
 
   useEffect(() => {
     if (state) {
       fetch(`https://eventdata.onrender.com/cities/${state}`)
-        .then((res) => res.json())
+        .then((r) => r.json())
         .then(setCities);
     } else {
       setCities([]);
@@ -29,7 +29,7 @@ export default function SearchPage() {
   const performSearch = () => {
     if (state && city) {
       fetch(`https://eventdata.onrender.com/events?state=${state}&city=${city}`)
-        .then((res) => res.json())
+        .then((r) => r.json())
         .then((data) => {
           setEvents(data);
           setHasSearched(true);
@@ -57,7 +57,7 @@ export default function SearchPage() {
               >
                 {s}
               </li>
-            ))}{" "}
+            ))}
           </ul>
         </div>
         <div id="city">
