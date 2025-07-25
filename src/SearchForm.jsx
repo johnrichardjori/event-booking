@@ -32,18 +32,22 @@ export default function SearchForm() {
       <div id="state">
         <select value={state} onChange={(e) => setState(e.target.value)}>
           <option value="">Select state</option>
-          {states.map((s) => (
-            <option key={s}>{s}</option>
-          ))}
+          <li>
+            {states.map((s) => (
+              <option key={s}>{s}</option>
+            ))}
+          </li>
         </select>
       </div>
 
       <div id="city">
         <select value={city} onChange={(e) => setCity(e.target.value)}>
           <option value="">Select city</option>
-          {cities.map((c) => (
-            <option key={c}>{c}</option>
-          ))}
+          <li>
+            {cities.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </li>
         </select>
       </div>
 
