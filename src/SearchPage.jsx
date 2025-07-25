@@ -65,7 +65,7 @@ export default function SearchPage() {
           </ul>
         </div>
 
-        <select name="" id="city"></select>
+        <div id="city"></div>
 
         {/* City dropdown container always present */}
         <div id="city">
