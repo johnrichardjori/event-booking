@@ -31,36 +31,3 @@ h1,
 h3 {
   margin: 0.5rem 0;
 }
-
-.custom-select-container {
-  position: relative;
-  width: 200px;
-  margin-bottom: 1rem;
-}
-
-.custom-select-container select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 100%;
-  background-color: white;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-/* Add custom arrow */
-.custom-select-container::after {
-  content: "";
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid black;
-  transform: translateY(-50%);
-}
