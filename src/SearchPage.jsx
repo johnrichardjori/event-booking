@@ -65,10 +65,9 @@ export default function SearchPage() {
           </ul>
         </div>
 
-        <div id="city"></div>
-
         {/* City dropdown container always present */}
         <div id="city">
+          <select></select>
           <ul>
             {cities.map((c) => (
               <li key={c} onClick={() => setCity(c)}>
