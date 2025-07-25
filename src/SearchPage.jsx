@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function SearchPage() {
   const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState(["Austin"]);
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [events, setEvents] = useState([]);
@@ -64,6 +64,8 @@ export default function SearchPage() {
             {/* if no states loaded yet, we still render an empty list */}
           </ul>
         </div>
+
+        <select name="" id="city"></select>
 
         {/* City dropdown container always present */}
         <div id="city">
