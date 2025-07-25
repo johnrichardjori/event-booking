@@ -11,14 +11,14 @@ export default function SearchPage() {
 
   useEffect(() => {
     fetch("https://eventdata.onrender.com/states")
-      .then((r) => r.json())
+      .then((res) => res.json())
       .then(setStates);
   }, []);
 
   useEffect(() => {
     if (state) {
       fetch(`https://eventdata.onrender.com/cities/${state}`)
-        .then((r) => r.json())
+        .then((res) => res.json())
         .then(setCities);
     } else {
       setCities([]);
@@ -29,7 +29,7 @@ export default function SearchPage() {
   const performSearch = () => {
     if (state && city) {
       fetch(`https://eventdata.onrender.com/events?state=${state}&city=${city}`)
-        .then((r) => r.json())
+        .then((res) => res.json())
         .then((data) => {
           setEvents(data);
           setHasSearched(true);
@@ -46,30 +46,28 @@ export default function SearchPage() {
         }}
       >
         <div id="state">
-          <ul>
+          <select value={state} onChange={(e) => setState(e.target.value)}>
+            <option value="">Select state</option>
             {states.map((s) => (
-              <li
-                key={s}
-                onClick={() => {
-                  setState(s);
-                  setCity("");
-                }}
-              >
+              <option key={s} value={s}>
                 {s}
-              </li>
+              </option>
             ))}
-          </ul>
+          </select>
         </div>
         <div id="city">
-          {state && (
-            <ul>
-              {cities.map((c) => (
-                <li key={c} onClick={() => setCity(c)}>
-                  {c}
-                </li>
-              ))}
-            </ul>
-          )}
+          <select
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            disabled={!state}
+          >
+            <option value="">Select city</option>
+            {cities.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
         </div>
         <button type="submit" id="searchBtn">
           Search
