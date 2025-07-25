@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function SearchPage() {
@@ -11,14 +11,14 @@ export default function SearchPage() {
 
   useEffect(() => {
     fetch("https://eventdata.onrender.com/states")
-      .then((res) => res.json())
+      .then((r) => r.json())
       .then(setStates);
   }, []);
 
   useEffect(() => {
     if (state) {
       fetch(`https://eventdata.onrender.com/cities/${state}`)
-        .then((res) => res.json())
+        .then((r) => r.json())
         .then(setCities);
     } else {
       setCities([]);
@@ -29,7 +29,7 @@ export default function SearchPage() {
   const performSearch = () => {
     if (state && city) {
       fetch(`https://eventdata.onrender.com/events?state=${state}&city=${city}`)
-        .then((res) => res.json())
+        .then((r) => r.json())
         .then((data) => {
           setEvents(data);
           setHasSearched(true);
@@ -45,7 +45,7 @@ export default function SearchPage() {
           performSearch();
         }}
       >
-        <div id="state">
+        <div id="state" className="custom-select-container">
           <select value={state} onChange={(e) => setState(e.target.value)}>
             <option value="">Select state</option>
             {states.map((s) => (
@@ -55,7 +55,8 @@ export default function SearchPage() {
             ))}
           </select>
         </div>
-        <div id="city">
+
+        <div id="city" className="custom-select-container">
           <select
             value={city}
             onChange={(e) => setCity(e.target.value)}
@@ -69,6 +70,7 @@ export default function SearchPage() {
             ))}
           </select>
         </div>
+
         <button type="submit" id="searchBtn">
           Search
         </button>
